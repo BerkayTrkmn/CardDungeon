@@ -15,5 +15,4 @@ MonoBehaviour:
   ID: 1
   cardName: Witch
   characterGO: {fileID: 1926517798052055132, guid: 62b7db058fda3004daad4589513233b3, type: 3}
-  health: 0
-  attack: 0
+  characterData: {fileID: 11400000, guid: 5d5c46408e466fa4d93ff992ee6712af, type: 2}

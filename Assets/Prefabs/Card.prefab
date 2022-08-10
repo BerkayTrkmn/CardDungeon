@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 5422681064683526326}
   - component: {fileID: 5422681064683526329}
   - component: {fileID: 1034286731122460354}
+  - component: {fileID: 3542628484383350188}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -273,8 +274,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackText: {fileID: 5422681064673979614}
-  HealthText: {fileID: 5422681065885563791}
+  healthText: {fileID: 5422681065885563791}
   characterPoint: {fileID: 5422681065821169949}
+  col: {fileID: 3542628484383350188}
+--- !u!61 &3542628484383350188
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5422681064683526331}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.28}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.28}
+  m_EdgeRadius: 0
 --- !u!1 &5422681064975502464
 GameObject:
   m_ObjectHideFlags: 0

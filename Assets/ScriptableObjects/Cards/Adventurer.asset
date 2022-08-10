@@ -15,5 +15,4 @@ MonoBehaviour:
   ID: 2
   cardName: Adventurer
   characterGO: {fileID: 8019744408221511827, guid: a3f1887b855f7a94d834c396d2e49169, type: 3}
-  health: 0
-  attack: 0
+  characterData: {fileID: 11400000, guid: e007086c3aec6034097ed607795279b2, type: 2}

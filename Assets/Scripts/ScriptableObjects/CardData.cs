@@ -7,6 +7,5 @@ public class CardData : ScriptableObject
     public int ID;
     public string cardName;
     public GameObject characterGO;
-    public int health;
-    public int attack;
+    public CharacterData characterData;
 }

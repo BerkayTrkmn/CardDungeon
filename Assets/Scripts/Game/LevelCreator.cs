@@ -4,7 +4,6 @@ using UnityEngine;
 using HelloScripts;
 public class LevelCreator : MonoBehaviour
 {
-    [SerializeField] private List<Card> cardDataList;
     [SerializeField]private Card card;
     [SerializeField] private float cardHeight = 1.5f;
     [SerializeField] private float cardwidth = 1.5f;
@@ -18,7 +17,7 @@ public class LevelCreator : MonoBehaviour
     }
     private void Start()
     {
-        CreateLevel();
+        CreateRandomLevel();
     }
     public void CreateLevel()
     {
@@ -33,9 +32,17 @@ public class LevelCreator : MonoBehaviour
             }
         }
     }
-    public void CrateRandomLevel()
+    public void CreateRandomLevel()
     {
-        //TODO: with enter and exit
+        for (int y = 0; y < levelHeight; y++)
+        {
+            for (int x = 0; x < levelWidth; x++)
+            {
+                Card tempCard = cardFactory.NewCardCreate(Random.Range(0,cardFactory.cardsData.Count));
+                tempCard.PlaceCard(new Vector2(cardwidth * x, cardHeight * y));
+                tempCard.gameObject.SetActive(true);
+            }
+        }
     }
 
 
