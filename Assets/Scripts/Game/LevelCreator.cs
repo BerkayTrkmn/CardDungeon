@@ -10,8 +10,10 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] private int levelHeight = 5;
     [SerializeField] private int levelWidth = 5;
     private CardFactory cardFactory;
+    public static Card[,] levelCards;
     private void Awake()
     {
+        levelCards = new Card[levelWidth, levelHeight];
         cardFactory = GetComponent<CardFactory>();
         ObjectPooler.instance.PoolObject(card.gameObject,50);
     }
@@ -26,9 +28,10 @@ public class LevelCreator : MonoBehaviour
         {
             for (int x = 0; x< levelWidth; x++)
             {
-                Card tempCard = cardFactory.NewCardCreate(0);
+                Card tempCard = cardFactory.NewCardCreate(0,x,y);
                 tempCard.PlaceCard(new Vector2(cardwidth * x, cardHeight * y));
                 tempCard.gameObject.SetActive(true);
+                levelCards[x, y] = tempCard;
             }
         }
     }
@@ -38,7 +41,7 @@ public class LevelCreator : MonoBehaviour
         {
             for (int x = 0; x < levelWidth; x++)
             {
-                Card tempCard = cardFactory.NewCardCreate(Random.Range(0,cardFactory.cardsData.Count));
+                Card tempCard = cardFactory.NewCardCreate(Random.Range(0,cardFactory.cardsData.Count),x,y);
                 tempCard.PlaceCard(new Vector2(cardwidth * x, cardHeight * y));
                 tempCard.gameObject.SetActive(true);
             }

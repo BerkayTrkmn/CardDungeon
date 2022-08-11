@@ -4,15 +4,19 @@ using TMPro;
 using UnityEngine;
 public class Card : MonoBehaviour
 {
-    private int cardId;
+    public int cardId;
     private string cardName;
     private GameObject characterGO;
-    [SerializeField] private TextMeshPro attackText;
-    [SerializeField] private TextMeshPro healthText;
+    public int x;
+    public int y;
+    public TextMeshPro attackText;
+    public TextMeshPro healthText;
     [SerializeField] private Transform characterPoint;
     [SerializeField] private Collider2D col;
-    public void SetCard(CardData cardData)
+    public void SetCard(CardData cardData ,int _x, int _y)
     {
+        x = _x;
+        y = _y;
         cardId = cardData.ID;
         cardName = cardData.cardName;
         characterGO = cardData.characterGO;
@@ -28,6 +32,7 @@ public class Card : MonoBehaviour
         Character tempCharacter=  tempCharacterGO.GetComponent<Character>();
         tempCharacter.SetCharacter(characterData.health,characterData.attack);
         tempCharacter.SetCharacterText(attackText, healthText);
+        tempCharacter.card = this;
     
     }
 

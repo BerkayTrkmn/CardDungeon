@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,7 +9,8 @@ public abstract class Character : Entity
 
     public int health;
     public int attack;
-
+    public static Action onCharacterAttack;
+    public Card card;
     public void SetCharacter(int _health, int _attack)
     {
         health = _health;
@@ -26,5 +28,15 @@ public abstract class Character : Entity
     public void SetHealthText(TextMeshPro healthText)
     {
         healthText.text = health.ToString();
+    }
+    public void CharacterAttack(Character character)
+    {
+        character.health -= attack;
+        character.SetHealthText(card.healthText);
+        onCharacterAttack?.Invoke();
+    }
+    public bool IsCharacterDead(Character character)
+    {
+        return character.health < 0 ? true : false; 
     }
 }
