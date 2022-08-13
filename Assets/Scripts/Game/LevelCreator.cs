@@ -15,7 +15,6 @@ public class LevelCreator : MonoBehaviour
     {
         levelCards = new Card[levelWidth, levelHeight];
         cardFactory = GetComponent<CardFactory>();
-        ObjectPooler.instance.PoolObject(card.gameObject,50);
     }
     private void Start()
     {
