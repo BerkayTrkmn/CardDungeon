@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private void OnTouchBegan(TouchInput touch)
     {
         RaycastHit2D hit = Physics2D.Raycast(touch.FirstWorldPosition, Vector2.zero);
+
         Card card;
         if (hit.collider != null && hit.collider.transform.TryGetComponent<Card>(out card))
         {

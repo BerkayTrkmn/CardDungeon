@@ -6,22 +6,13 @@ using UnityEngine;
 public class CardFactory : MonoBehaviour 
 {
 
-    [SerializeField]private List<Card> prefabList;
+    [SerializeField]private Card prefab;
     public List<CardData> cardsData;
 
-    private void Awake()
-    {
-        foreach (Card card in prefabList)
-        {
-            ObjectPooler.instance.PoolObject(card.gameObject, 50);
-        }
-      
-
-    }
     public Card NewCardCreate(int cardId, int x,int y)
     {
         CardData cardData = cardsData[cardId];
-         Card currentCard =  ObjectPooler.instance.GetPooledObject(cardData.card.gameObject).GetComponent<Card>();
+         Card currentCard =  ObjectPooler.instance.GetPooledObject(prefab.gameObject).GetComponent<Card>();
         currentCard.SetCard(cardData,x, y);
         return currentCard;
     }
