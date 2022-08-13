@@ -11,6 +11,8 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] private int levelWidth = 5;
     private CardFactory cardFactory;
     public static Card[,] levelCards;
+    public CharacterCard[] playerCharacters;
+    public ExitDoor exitDoor;
     private void Awake()
     {
         levelCards = new Card[levelWidth, levelHeight];
@@ -40,7 +42,16 @@ public class LevelCreator : MonoBehaviour
         {
             for (int x = 0; x < levelWidth; x++)
             {
-                Card tempCard = cardFactory.NewCardCreate(Random.Range(0,cardFactory.cardsData.Count),x,y);
+                Card tempCard;
+                if (x == 0 && y == 0)
+                {
+                    tempCard = cardFactory.NewCardCreate(playerCharacters[0].cardId, x, y);
+                }
+                else if (x == levelWidth && y == levelHeight)
+                {
+                   // tempCard = cardFactory.NewCardCreate(exitDoor.cardId, x, y);
+                }
+                 tempCard = cardFactory.NewCardCreate(Random.Range(0,cardFactory.cardsData.Count),x,y);
                 tempCard.PlaceCard(new Vector2(cardwidth * x, cardHeight * y));
                 tempCard.gameObject.SetActive(true);
             }
