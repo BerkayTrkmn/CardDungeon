@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExitDoor : DungeonObject
+public class ExitDoor : DungeonObjects
 {
-    public override void ObjectAction()
-    {
-        //TODO : NextLevel
-    }
 }
