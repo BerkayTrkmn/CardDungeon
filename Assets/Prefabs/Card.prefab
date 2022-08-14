@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5422681064683526326}
   - component: {fileID: 5422681064683526329}
-  - component: {fileID: 1034286731122460354}
+  - component: {fileID: 8988992160412855235}
   - component: {fileID: 3542628484383350188}
   m_Layer: 0
   m_Name: Card
@@ -261,7 +261,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1034286731122460354
+--- !u!114 &8988992160412855235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,9 +270,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5422681064683526331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42644ea30ab7b6c47b09855ec34c73d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e96fe112bc55e24abcd4d4d071ca2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardId: 0
+  x: 0
+  y: 0
   attackText: {fileID: 5422681064673979614}
   healthText: {fileID: 5422681065885563791}
   characterPoint: {fileID: 5422681065821169949}

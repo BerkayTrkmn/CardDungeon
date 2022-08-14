@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 799289590d924b145930c786613d66fa, type: 3}
+  m_Script: {fileID: 11500000, guid: b80172ce1df501e498bff5ae939eed78, type: 3}
   m_Name: Adventurer
   m_EditorClassIdentifier: 
-  ID: 2
+  ID: 1
   cardName: Adventurer
   characterGO: {fileID: 8019744408221511827, guid: a3f1887b855f7a94d834c396d2e49169, type: 3}
+  card: {fileID: 8988992160412855235, guid: b35da4a04b8fde547b9a4292ec346851, type: 3}
   characterData: {fileID: 11400000, guid: e007086c3aec6034097ed607795279b2, type: 2}

@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 799289590d924b145930c786613d66fa, type: 3}
+  m_Script: {fileID: 11500000, guid: b80172ce1df501e498bff5ae939eed78, type: 3}
   m_Name: Witch
   m_EditorClassIdentifier: 
-  ID: 1
+  ID: 2
   cardName: Witch
   characterGO: {fileID: 1926517798052055132, guid: 62b7db058fda3004daad4589513233b3, type: 3}
+  card: {fileID: 8988992160412855235, guid: b35da4a04b8fde547b9a4292ec346851, type: 3}
   characterData: {fileID: 11400000, guid: 5d5c46408e466fa4d93ff992ee6712af, type: 2}
