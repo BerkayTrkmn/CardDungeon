@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ExitDoor : DungeonObject
 {
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
     public override void ObjectAction()
     {
         //TODO : NextLevel

@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8505ea963c80c3241abd205fb480d3a5, type: 3}
-  m_Name: WitchData
+  m_Script: {fileID: 11500000, guid: b80172ce1df501e498bff5ae939eed78, type: 3}
+  m_Name: 1Adventurer
   m_EditorClassIdentifier: 
-  health: 6
-  attack: 5
+  ID: 1
+  cardName: Adventurer
+  card: {fileID: 3273313795187095609, guid: d1fe5b4c983b1a14e9fdaf16becfc7b9, type: 3}
+  health: 10
+  attack: 3
+  sight: 1
