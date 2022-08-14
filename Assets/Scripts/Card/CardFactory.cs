@@ -25,5 +25,11 @@ public class CardFactory : MonoBehaviour
         currentCard.SetCard(cardData,x, y);
         return currentCard;
     }
+    public Card NewCardCreate(Card prefab,CardData data, int x, int y)
+    {
+        Card currentCard = Instantiate(prefab).GetComponent<Card>();
+        currentCard.SetCard(data, x, y);
+        return currentCard;
+    }
 }
 

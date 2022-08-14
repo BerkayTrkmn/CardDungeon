@@ -4,18 +4,34 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public abstract class Character : Entity
+public abstract class Character : Card
 {
 
     public int health;
     public int attack;
+    public int sight;
+    protected TextMeshPro attackText;
+    protected TextMeshPro healthText;
     public static Action onCharacterAttack;
-    public Card card;
-    public void SetCharacter(int _health, int _attack)
+
+    protected override void OnEnable()
     {
-        health = _health;
-        attack = _attack;
+        base.OnEnable();
+        characterStatsParent.gameObject.SetActive(true);
+        healthText = characterStatsParent.GetChild(0).GetChild(0).GetComponent<TextMeshPro>();
+        attackText = characterStatsParent.GetChild(1).GetChild(0).GetComponent<TextMeshPro>();
     }
+    public override void SetCard(CardData cardData, int _x, int _y)
+    {
+        base.SetCard(cardData, _x, _y);
+        CharacterCardData data = ((CharacterCardData)cardData);
+
+        health = data.health;
+        attack = data.attack;
+        sight = data.sight;
+        SetCharacterText(attackText, healthText);
+    }
+
     public void SetCharacterText(TextMeshPro attackText, TextMeshPro healthText)
     {
         SetAttackText(attackText);
@@ -32,7 +48,7 @@ public abstract class Character : Entity
     public void CharacterAttack(Character character)
     {
         character.health -= attack;
-        character.SetHealthText(card.healthText);
+        character.SetHealthText(healthText);
         onCharacterAttack?.Invoke();
     }
     public bool IsCharacterDead(Character character)

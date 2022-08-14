@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8019744408221511825}
   - component: {fileID: 8019744408221511826}
-  - component: {fileID: 5337136564341730064}
   - component: {fileID: 7237055027227016942}
   m_Layer: 0
   m_Name: Adventurer
@@ -86,22 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5337136564341730064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8019744408221511827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb813abf01429b444bb128443662fdf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
-  health: 0
-  attack: 0
-  card: {fileID: 0}
 --- !u!95 &7237055027227016942
 Animator:
   serializedVersion: 4

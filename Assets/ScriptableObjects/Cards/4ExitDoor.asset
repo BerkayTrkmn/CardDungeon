@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8505ea963c80c3241abd205fb480d3a5, type: 3}
-  m_Name: EagleData
+  m_Script: {fileID: 11500000, guid: cc9abf3900b0e7446a1b51ca095cc0e7, type: 3}
+  m_Name: 4ExitDoor
   m_EditorClassIdentifier: 
-  health: 4
-  attack: 2
+  ID: 4
+  cardName: Exit
+  card: {fileID: 6861810038840376724, guid: aafc2f4239a7af54dbd05b74f34ddc4d, type: 3}
