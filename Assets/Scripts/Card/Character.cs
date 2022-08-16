@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using HelloScripts;
 
 public abstract class Character : Card
 {
@@ -10,6 +11,7 @@ public abstract class Character : Card
     public int health;
     public int attack;
     public int sight;
+    public float moveTime = 0.5f;
     protected TextMeshPro attackText;
     protected TextMeshPro healthText;
     public static Action onCharacterAttack;
@@ -48,11 +50,36 @@ public abstract class Character : Card
     public void CharacterAttack(Character character)
     {
         character.health -= attack;
-        character.SetHealthText(healthText);
+        if (character.health < 0) character.health = 0;
+        character.SetHealthText(character.healthText);
         onCharacterAttack?.Invoke();
     }
-    public bool IsCharacterDead(Character character)
+    public bool IsCharacterDead()
     {
-        return character.health < 0 ? true : false; 
+        return health <= 0 ? true : false; 
     }
+    public override IEnumerator CardClicked(Character playerCard)
+    {
+        if (health != 0)
+        {
+
+
+            playerCard.CharacterAttack(this);
+            yield return new WaitForSeconds(0.3f);
+            if (!IsCharacterDead())
+                CharacterAttack(playerCard);
+            else
+            {
+                //TODO : player haraket edebilir.
+                characterGO.Destroy();
+
+            }
+            if (playerCard.IsCharacterDead())
+            {
+                PlayerController.onGameFailed?.Invoke();
+
+            }
+        }
+    }
+    
 }

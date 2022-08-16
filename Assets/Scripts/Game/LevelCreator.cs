@@ -4,6 +4,7 @@ using UnityEngine;
 using HelloScripts;
 public class LevelCreator : MonoBehaviour
 {
+    public static LevelCreator instance;
     [SerializeField] private float cardHeight = 1.5f;
     [SerializeField] private float cardwidth = 1.5f;
     [SerializeField] private int levelHeight = 5;
@@ -19,6 +20,7 @@ public class LevelCreator : MonoBehaviour
     public Camera mainCamera;
     private void Awake()
     {
+        instance = this;
         mainCamera = Camera.main;
         levelCards = new Card[levelWidth, levelHeight];
         cardFactory = GetComponent<CardFactory>();
@@ -55,7 +57,8 @@ public class LevelCreator : MonoBehaviour
                     mainCamera.transform.parent = playerCharacter.transform;
                 }
                 else if (x == levelWidth - 1 && y == levelHeight - 1)
-                { tempCard = cardFactory.NewCardCreate(exitDoor, exitDoorData, x, y);
+                {
+                    tempCard = cardFactory.NewCardCreate(exitDoor, exitDoorData, x, y);
                     tempCard.gameObject.SetActive(false);
                 }
                 else
