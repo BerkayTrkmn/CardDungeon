@@ -5,11 +5,11 @@ using HelloScripts;
 public class LevelCreator : MonoBehaviour
 {
     public static LevelCreator instance;
-    [SerializeField] private float cardHeight = 1.5f;
-    [SerializeField] private float cardwidth = 1.5f;
-    [SerializeField] private int levelHeight = 5;
-    [SerializeField] private int levelWidth = 5;
-    private CardFactory cardFactory;
+    public static float cardHeight = 2f;
+    public static float cardWidth = 1.5f;
+    public static int levelHeight = 5;
+    public static int levelWidth = 5;
+    public CardFactory cardFactory;
     public static Card[,] levelCards;
     public List<Character> playerCharacters;
     public List<CardData> playerCharacterDatas;
@@ -37,7 +37,7 @@ public class LevelCreator : MonoBehaviour
             for (int x = 0; x < levelWidth; x++)
             {
                 Card tempCard = cardFactory.NewCardCreate(0, x, y);
-                tempCard.PlaceCard(new Vector2(cardwidth * x, cardHeight * y));
+                tempCard.PlaceCard(new Vector2(cardWidth * x, cardHeight * y));
                 tempCard.gameObject.SetActive(true);
                 levelCards[x, y] = tempCard;
             }
@@ -64,21 +64,49 @@ public class LevelCreator : MonoBehaviour
                 else
                     tempCard = cardFactory.NewCardCreate(Random.Range(0, cardFactory.cardsData.Count), x, y);
 
-                tempCard.PlaceCard(new Vector2(cardwidth * x, cardHeight * y));
-                if (IsSighted(tempCard))
+
+                if (CardIsSighted(playerCharacter, tempCard))
                     tempCard.gameObject.SetActive(true);
+                levelCards[x, y] = tempCard;
             }
         }
     }
-    public bool IsSighted(Card levelCard)
+    public bool CardIsSighted(Character movingCard, Card levelCard)
     {
-        int distanceFromPlayer = Mathf.Abs(playerCharacter.x - levelCard.x) + Mathf.Abs(playerCharacter.y - levelCard.y);
+        if (levelCard is null) return false;
+        int distanceFromPlayer = Mathf.Abs(movingCard.x - levelCard.x) + Mathf.Abs(movingCard.y - levelCard.y);
         //int playerPosition = playerCharacter.x + playerCharacter.y;
-        int sight = playerCharacter.sight;
+        int sight = movingCard.sight;
         if (sight >= distanceFromPlayer)
             return true;
 
         return false;
     }
 
+    //TODO: hareket edince sight düzgün çalýþmýyor sadece baþlangýçta düzgün çalýþýyor
+    public void SetPlayerSightedCards(Character movingCharacter)
+    {
+        for (int y = 0; y < levelHeight; y++)
+        {
+            for (int x = 0; x < levelWidth; x++)
+            {
+                Card tempCard = levelCards[x, y];
+                Debug.Log(x + "," + y + " " + CardIsSighted(movingCharacter, tempCard));
+                if (CardIsSighted(movingCharacter, tempCard))
+                    tempCard.gameObject.SetActive(true);
+            }
+        }
+    }
+    public void CloseAllLevelCards()
+    {
+        for (int y = 0; y < levelHeight; y++)
+        {
+            for (int x = 0; x < levelWidth; x++)
+            {
+                if (x == playerCharacter.x && y == playerCharacter.y) continue;
+                levelCards[x, y].gameObject.SetActive(false);
+            }
+        }
+    }
 }
+

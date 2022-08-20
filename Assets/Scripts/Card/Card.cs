@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -19,7 +20,7 @@ public abstract class Card : MonoBehaviour
         nameShowerParent = transform.GetChild(2);
         characterPoint = transform.GetChild(3);
         col = GetComponent<Collider2D>();
-        characterGO = characterPoint.GetChild(0).gameObject;
+        if(characterPoint.childCount != 0)characterGO = characterPoint.GetChild(0).gameObject;
     }
     public virtual void SetCard(CardData cardData ,int _x, int _y)
     {
@@ -35,5 +36,6 @@ public abstract class Card : MonoBehaviour
     }
     public abstract IEnumerator CardClicked(Character playerCard);
 
-    
+  
+
 }

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public static Action onGameStarted;
     public static Action onGameFailed;
     public static Action onGameCompleted;
+   public static PlayerState playerState = PlayerState.Play;
     private void OnEnable()
     {
         TouchManager.Instance.onTouchBegan += OnTouchBegan;
@@ -20,15 +21,17 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTouchBegan(TouchInput touch)
     {
-        RaycastHit2D hit = Physics2D.Raycast(touch.FirstWorldPosition, Vector2.zero);
-
-        if (hit.collider != null && hit.collider.transform.TryGetComponent<Card>(out Card card))
+        if (playerState == PlayerState.Play)
         {
-            Debug.Log(card.name + " " + card.x + " " + card.y);
+            RaycastHit2D hit = Physics2D.Raycast(touch.FirstWorldPosition, Vector2.zero);
 
-            StartCoroutine(card.CardClicked(playerCard));
+            if (hit.collider != null && hit.collider.transform.TryGetComponent<Card>(out Card card))
+            {
+                Debug.Log(card.name + " " + card.x + " " + card.y);
+                playerState = PlayerState.Idle;
+                StartCoroutine(card.CardClicked(playerCard));
+            }
         }
-
     }
 
     private void OnDisable()
@@ -36,4 +39,9 @@ public class PlayerController : MonoBehaviour
         TouchManager.Instance.onTouchBegan -= OnTouchBegan;
     }
 
+}
+public enum PlayerState
+{
+    Play,
+    Idle,
 }

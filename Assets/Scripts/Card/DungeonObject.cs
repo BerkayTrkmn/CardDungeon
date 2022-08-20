@@ -1,3 +1,5 @@
+using DG.Tweening;
+using HelloScripts;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,7 +27,12 @@ public abstract class DungeonObject : Card
         nameText.text = cardName.ToUpperInvariant();
         nameShowerParent.gameObject.SetActive(true);
     }
-
+    public override IEnumerator CardClicked(Character playerCard)
+    {
+        gameObject.SetActive(false);
+        yield return 0f.GetWait();
+        playerCard.MoveCard(this);
+    }
 }
 
 

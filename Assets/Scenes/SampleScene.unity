@@ -329,10 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1145f6b1d37348a48b939be8b589babb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardHeight: 1.75
-  cardwidth: 1.5
-  levelHeight: 5
-  levelWidth: 5
+  cardFactory: {fileID: 0}
   playerCharacters:
   - {fileID: 3273313795187095609, guid: d1fe5b4c983b1a14e9fdaf16becfc7b9, type: 3}
   playerCharacterDatas:
@@ -340,7 +337,7 @@ MonoBehaviour:
   exitDoor: {fileID: 6861810038840376724, guid: aafc2f4239a7af54dbd05b74f34ddc4d, type: 3}
   exitDoorData: {fileID: 11400000, guid: 2c623b9f549706747aebafbd74674d54, type: 2}
   playerCharacter: {fileID: 0}
-  playerCharacterStartPoint: {x: 1, y: 1}
+  playerCharacterStartPoint: {x: 0, y: 0}
   mainCamera: {fileID: 0}
 --- !u!4 &1801955079
 Transform:
@@ -384,9 +381,11 @@ MonoBehaviour:
   prefabList:
   - {fileID: 8798020109220111801, guid: 3e4c0c00cc21c414a82e9fcf39abbef3, type: 3}
   - {fileID: 5963284239199053842, guid: cbdebb33797559345b3734d15fa52b2b, type: 3}
+  - {fileID: 7922700941647715643, guid: f3c0c35b1b1cb344e9a5bfe6c0562edd, type: 3}
   cardsData:
   - {fileID: 11400000, guid: 47cd36516afee014486c3d6cd0042344, type: 2}
   - {fileID: 11400000, guid: c156daada0f2b7b46961573f5e654373, type: 2}
+  - {fileID: 11400000, guid: c52f550b1c516f94a9c1426c4c045bbd, type: 2}
 --- !u!1001 &1926573282222196298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -443,6 +442,14 @@ PrefabInstance:
       value: Card (1)
       objectReference: {fileID: 0}
     - target: {fileID: 460881552567355660, guid: d1fe5b4c983b1a14e9fdaf16becfc7b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460881553076891923, guid: d1fe5b4c983b1a14e9fdaf16becfc7b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101518746449545884, guid: d1fe5b4c983b1a14e9fdaf16becfc7b9, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

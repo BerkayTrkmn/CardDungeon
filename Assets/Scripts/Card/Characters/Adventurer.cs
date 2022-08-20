@@ -4,4 +4,7 @@ using UnityEngine;
 
 public class Adventurer : Character
 {
+    private void Awake()
+    {
+    }
 }

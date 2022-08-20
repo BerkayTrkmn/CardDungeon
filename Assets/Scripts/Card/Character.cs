@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using HelloScripts;
-
+using System.Reflection;
+using DG.Tweening;
 public abstract class Character : Card
 {
 
@@ -15,7 +16,9 @@ public abstract class Character : Card
     protected TextMeshPro attackText;
     protected TextMeshPro healthText;
     public static Action onCharacterAttack;
-
+    public static Action onEnemyKilled;
+    public bool isDead = false;
+    public Type cardType;
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -54,32 +57,63 @@ public abstract class Character : Card
         character.SetHealthText(character.healthText);
         onCharacterAttack?.Invoke();
     }
+
     public bool IsCharacterDead()
     {
-        return health <= 0 ? true : false; 
+        return health <= 0 ? true : false;
     }
     public override IEnumerator CardClicked(Character playerCard)
     {
-        if (health != 0)
+        if (health > 0)
         {
-
-
             playerCard.CharacterAttack(this);
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.1f);
             if (!IsCharacterDead())
                 CharacterAttack(playerCard);
             else
             {
                 //TODO : player haraket edebilir.
                 characterGO.Destroy();
-
+                attackText.gameObject.SetActive(false);
+                healthText.gameObject.SetActive(false);
+                isDead = true;
+                onEnemyKilled?.Invoke();
             }
             if (playerCard.IsCharacterDead())
             {
                 PlayerController.onGameFailed?.Invoke();
 
             }
+            PlayerController.playerState = PlayerState.Play;
         }
+        else
+        {
+
+            playerCard.MoveCard(this);
+            gameObject.SetActive(false);
+        }
+       
     }
-    
+    public virtual void MoveCard(Card moveToCard, TweenCallback onComplete)
+    {
+        transform.DOMove(moveToCard.transform.position, 0.5f).OnComplete(onComplete);
+    }
+    public virtual void MoveCard(Card moveToCard)
+    {
+        LevelCreator lc = LevelCreator.instance;
+        //lc.CloseAllLevelCards();
+        transform.DOMove(moveToCard.transform.position, 0.5f).OnComplete(() =>
+        {
+            LevelCreator.levelCards[x, y] = lc.cardFactory.NewCardCreate(lc.cardFactory.prefabList[2], lc.cardFactory.cardsData[2], x, y);
+            x = moveToCard.x;
+            y = moveToCard.y;
+            LevelCreator.levelCards[x, y] = this;
+            lc.SetPlayerSightedCards(this);
+            PlayerController.playerState = PlayerState.Play;
+        });
+       
+
+
+    }
+
 }
