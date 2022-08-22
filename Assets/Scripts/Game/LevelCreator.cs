@@ -71,19 +71,40 @@ public class LevelCreator : MonoBehaviour
             }
         }
     }
+
+    #region CardIsSighted Overloads
     public bool CardIsSighted(Character movingCard, Card levelCard)
     {
         if (levelCard is null) return false;
         int distanceFromPlayer = Mathf.Abs(movingCard.x - levelCard.x) + Mathf.Abs(movingCard.y - levelCard.y);
-        //int playerPosition = playerCharacter.x + playerCharacter.y;
         int sight = movingCard.sight;
         if (sight >= distanceFromPlayer)
             return true;
 
         return false;
     }
+    public bool CardIsSighted(Card levelCard)
+    {
+        if (levelCard is null) return false;
+        int distanceFromPlayer = Mathf.Abs(playerCharacter.x - levelCard.x) + Mathf.Abs(playerCharacter.y - levelCard.y);
+        int sight = playerCharacter.sight;
+        if (sight >= distanceFromPlayer)
+            return true;
 
-    //TODO: hareket edince sight düzgün çalýþmýyor sadece baþlangýçta düzgün çalýþýyor
+        return false;
+    }
+    public bool CardIsSighted(Card levelCard, int sight)
+    {
+        if (levelCard is null) return false;
+        int distanceFromPlayer = Mathf.Abs(playerCharacter.x - levelCard.x) + Mathf.Abs(playerCharacter.y - levelCard.y);
+        if (sight >= distanceFromPlayer)
+            return true;
+
+        return false;
+    }
+
+    #endregion
+
     public void SetPlayerSightedCards(Character movingCharacter)
     {
         for (int y = 0; y < levelHeight; y++)

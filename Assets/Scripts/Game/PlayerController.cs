@@ -11,13 +11,22 @@ public class PlayerController : MonoBehaviour
     public static Action onGameFailed;
     public static Action onGameCompleted;
    public static PlayerState playerState = PlayerState.Play;
+    LevelCreator lc;
     private void OnEnable()
     {
         TouchManager.Instance.onTouchBegan += OnTouchBegan;
+        onGameFailed -= OnGameFailed;
     }
+
+    private void OnGameFailed()
+    {
+        TouchManager.Instance.isActive = false;
+    }
+
     private void Start()
     {
-        playerCard = LevelCreator.instance.playerCharacter;
+        lc = LevelCreator.instance;
+       playerCard =lc.playerCharacter;
     }
     private void OnTouchBegan(TouchInput touch)
     {
@@ -27,9 +36,13 @@ public class PlayerController : MonoBehaviour
 
             if (hit.collider != null && hit.collider.transform.TryGetComponent<Card>(out Card card))
             {
-                Debug.Log(card.name + " " + card.x + " " + card.y);
-                playerState = PlayerState.Idle;
-                StartCoroutine(card.CardClicked(playerCard));
+                if (lc.CardIsSighted(card,1))
+                {
+                    Debug.Log(card.name + " " + card.x + " " + card.y);
+                    playerState = PlayerState.Idle;
+                    StartCoroutine(card.CardClicked(playerCard));
+                }
+               
             }
         }
     }
@@ -37,7 +50,9 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         TouchManager.Instance.onTouchBegan -= OnTouchBegan;
+        onGameFailed -= OnGameFailed;
     }
+   
 
 }
 public enum PlayerState
