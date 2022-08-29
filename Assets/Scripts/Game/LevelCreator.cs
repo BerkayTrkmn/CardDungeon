@@ -18,6 +18,7 @@ public class LevelCreator : MonoBehaviour
     public Character playerCharacter;
     public Vector2Int playerCharacterStartPoint = new Vector2Int(0, 0);
     public Camera mainCamera;
+    
     private void Awake()
     {
         instance = this;
@@ -54,7 +55,8 @@ public class LevelCreator : MonoBehaviour
                 if (x == playerCharacterStartPoint.x && y == playerCharacterStartPoint.y)
                 {
                     tempCard = playerCharacter;
-                    mainCamera.transform.parent = playerCharacter.transform;
+                    mainCamera.transform.position = playerCharacter.transform.position + Vector3.back;
+                    
                 }
                 else if (x == levelWidth - 1 && y == levelHeight - 1)
                 {

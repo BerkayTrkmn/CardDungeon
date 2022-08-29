@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ public abstract class Card : MonoBehaviour
         characterPoint = transform.GetChild(3);
         col = GetComponent<Collider2D>();
         if(characterPoint.childCount != 0)characterGO = characterPoint.GetChild(0).gameObject;
+        CreateCardWithAnimation();
     }
     public virtual void SetCard(CardData cardData ,int _x, int _y)
     {
@@ -36,6 +38,10 @@ public abstract class Card : MonoBehaviour
     }
     public abstract IEnumerator CardClicked(Character playerCard);
 
-  
+    public void CreateCardWithAnimation()
+    {
+        transform.localScale = Vector3.one *0.01f;
+        transform.DOScale(Vector3.one * 1.2f, 0.2f);
+    }
 
 }

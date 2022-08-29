@@ -97,10 +97,12 @@ public abstract class Character : Card
     public virtual void MoveCard(Card moveToCard, TweenCallback onComplete)
     {
         transform.DOMove(moveToCard.transform.position, 0.5f).OnComplete(onComplete);
+        
     }
     public virtual void MoveCard(Card moveToCard)
     {
         LevelCreator lc = LevelCreator.instance;
+        lc.mainCamera.transform.DOMove(moveToCard.transform.position + Vector3.back, 0.5f);
         //lc.CloseAllLevelCards();
         transform.DOMove(moveToCard.transform.position, 0.5f).OnComplete(() =>
         {
@@ -108,6 +110,7 @@ public abstract class Character : Card
             x = moveToCard.x;
             y = moveToCard.y;
             LevelCreator.levelCards[x, y] = this;
+           
             lc.SetPlayerSightedCards(this);
             PlayerController.playerState = PlayerState.Play;
         });
