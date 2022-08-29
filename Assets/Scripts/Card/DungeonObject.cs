@@ -12,7 +12,7 @@ public abstract class DungeonObject : Card
     protected override void OnEnable()
     {
         base.OnEnable();
-       
+
     }
     public override void SetCard(CardData cardData, int _x, int _y)
     {
@@ -33,6 +33,10 @@ public abstract class DungeonObject : Card
         yield return 0f.GetWait();
         playerCard.MoveCard(this);
     }
+    //public void ChangeThisCardWithMoney(Card card)
+    //{
+
+    //}
 }
 
 

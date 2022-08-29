@@ -382,10 +382,12 @@ MonoBehaviour:
   - {fileID: 8798020109220111801, guid: 3e4c0c00cc21c414a82e9fcf39abbef3, type: 3}
   - {fileID: 5963284239199053842, guid: cbdebb33797559345b3734d15fa52b2b, type: 3}
   - {fileID: 7922700941647715643, guid: f3c0c35b1b1cb344e9a5bfe6c0562edd, type: 3}
+  - {fileID: 2883564272845073194, guid: 984a97798a6cd104b948b2aea15ddae4, type: 3}
   cardsData:
   - {fileID: 11400000, guid: 47cd36516afee014486c3d6cd0042344, type: 2}
   - {fileID: 11400000, guid: c156daada0f2b7b46961573f5e654373, type: 2}
   - {fileID: 11400000, guid: c52f550b1c516f94a9c1426c4c045bbd, type: 2}
+  - {fileID: 11400000, guid: 44f4dd8799160914f969187b227e4ed9, type: 2}
 --- !u!1001 &1926573282222196298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -512,7 +514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 460881552567355660, guid: d1fe5b4c983b1a14e9fdaf16becfc7b9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1fe5b4c983b1a14e9fdaf16becfc7b9, type: 3}
