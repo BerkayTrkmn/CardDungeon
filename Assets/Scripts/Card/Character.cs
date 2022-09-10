@@ -106,7 +106,7 @@ public abstract class Character : Card
         //lc.CloseAllLevelCards();
         transform.DOMove(moveToCard.transform.position, 0.5f).OnComplete(() =>
         {
-            LevelCreator.levelCards[x, y] = lc.cardFactory.NewCardCreate(lc.cardFactory.prefabList[2], lc.cardFactory.cardsData[2], x, y);
+            LevelCreator.levelCards[x, y] = lc.cardFactory.NewCardCreateWithPrefab(lc.cardFactory.prefabList[2], lc.cardFactory.cardsData[2], x, y);
             x = moveToCard.x;
             y = moveToCard.y;
             LevelCreator.levelCards[x, y] = this;

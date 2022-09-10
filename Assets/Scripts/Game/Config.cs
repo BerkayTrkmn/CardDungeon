@@ -5,4 +5,5 @@ using UnityEngine;
 public class Config : MonoBehaviour
 {
     public const string PREFS_MONEY = "Money";
+    public const string PREFS_LEVEL = "Level";
 }

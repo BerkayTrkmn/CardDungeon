@@ -11,17 +11,21 @@ public class TreasureChest : DungeonObject , IItemDropper
     }
     public override IEnumerator CardClicked(Character playerCard)
     {
-        yield return 0.3f.GetWait();
+        yield return 0f.GetWait();
+        DropItem(7);
+        gameObject.SetActive(false);
+        PlayerController.playerState = PlayerState.Play;
     }
 
-    public void DropItem(DungeonObject dungeonObject)
+    public void DropItem(int cardID)
     {
-        throw new System.NotImplementedException();
+       Card droppedCard = LevelCreator.instance.cardFactory.NewCardCreateWithID(cardID, x, y);
+        droppedCard.gameObject.SetActive(true);
     }
 }
 
 internal interface IItemDropper
 {
 
-    public void DropItem(DungeonObject dungeonObject);
+    public void DropItem(int cardID);
 }

@@ -18,9 +18,9 @@ public class CardFactory : MonoBehaviour
 
 
     }
-    public Card NewCardCreate(int cardId, int x, int y)
+    public Card NewCardCreateWithIndex(int cardIndex, int x, int y)
     {
-        CardData cardData = cardsData[cardId];
+        CardData cardData = cardsData[cardIndex];
         // Card currentCard =  ObjectPooler.instance.GetPooledObject(cardData.card.gameObject).GetComponent<Card>();
         Card currentCard = Instantiate(cardData.card.gameObject).GetComponent<Card>();
         currentCard.gameObject.SetActive(false);
@@ -28,13 +28,32 @@ public class CardFactory : MonoBehaviour
         currentCard.PlaceCard(new Vector2(LevelCreator.cardWidth * x, LevelCreator.cardHeight * y));
         return currentCard;
     }
-    public Card NewCardCreate(Card prefab, CardData data, int x, int y)
+    public Card NewCardCreateWithID(int cardID, int x, int y)
+    {
+        CardData cardData = GetCardDataWithID(cardID);
+        // Card currentCard =  ObjectPooler.instance.GetPooledObject(cardData.card.gameObject).GetComponent<Card>();
+        Card currentCard = Instantiate(cardData.card.gameObject).GetComponent<Card>();
+        currentCard.gameObject.SetActive(false);
+        currentCard.SetCard(cardData, x, y);
+        currentCard.PlaceCard(new Vector2(LevelCreator.cardWidth * x, LevelCreator.cardHeight * y));
+        return currentCard;
+    }
+    public Card NewCardCreateWithPrefab(Card prefab, CardData data, int x, int y)
     {
         Card currentCard = Instantiate(prefab).GetComponent<Card>();
         currentCard.gameObject.SetActive(true);
         currentCard.SetCard(data, x, y);
         currentCard.PlaceCard(new Vector2(LevelCreator.cardWidth * x, LevelCreator.cardHeight * y));
         return currentCard;
+    }
+    public CardData GetCardDataWithID(int cardID)
+    {
+        foreach (CardData data in cardsData)
+        {
+            if (data.ID == cardID)
+                return data;
+        }
+        return null;
     }
 }
 

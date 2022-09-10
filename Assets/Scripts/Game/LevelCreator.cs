@@ -17,36 +17,43 @@ public class LevelCreator : MonoBehaviour
     public DungeonObjectData exitDoorData;
     public Character playerCharacter;
     public Vector2Int playerCharacterStartPoint = new Vector2Int(0, 0);
+    public Vector2Int exitDoorCreationPoint = new Vector2Int(levelWidth - 1, levelHeight - 1);
     public Camera mainCamera;
-    
+    public static int levelNumber = 1;
+    public LevelData[] levels;
+    Array2DInt levelData = null;
     private void Awake()
     {
         instance = this;
         mainCamera = Camera.main;
         levelCards = new Card[levelWidth, levelHeight];
         cardFactory = GetComponent<CardFactory>();
+        levelNumber = PlayerPrefs.GetInt(Config.PREFS_LEVEL, 1);
+        
     }
     private void Start()
     {
-        CreateRandomLevel();
+        LevelSelection();
+        CreateLevel();
     }
+
+  
+    public void LevelSelection()
+    {
+        if(levelNumber-1 < levels.Length)
+        {
+            LevelData data = levels[levelNumber-1];
+            playerCharacterStartPoint = data.playerPosition;
+            exitDoorCreationPoint = data.exitPosition;
+            levelData = data.levelCardIDs;
+        }
+      
+    }
+
     public void CreateLevel()
     {
-        //TODO : With level scriptable object
-        for (int y = 0; y < levelHeight; y++)
-        {
-            for (int x = 0; x < levelWidth; x++)
-            {
-                Card tempCard = cardFactory.NewCardCreate(0, x, y);
-                tempCard.PlaceCard(new Vector2(cardWidth * x, cardHeight * y));
-                tempCard.gameObject.SetActive(true);
-                levelCards[x, y] = tempCard;
-            }
-        }
-    }
-    public void CreateRandomLevel()
-    {
-        playerCharacter = (Character)cardFactory.NewCardCreate(playerCharacters[0], playerCharacterDatas[0], playerCharacterStartPoint.x, playerCharacterStartPoint.y);
+        
+        playerCharacter = (Character)cardFactory.NewCardCreateWithPrefab(playerCharacters[0], playerCharacterDatas[0], playerCharacterStartPoint.x, playerCharacterStartPoint.y);
         for (int y = 0; y < levelHeight; y++)
         {
             for (int x = 0; x < levelWidth; x++)
@@ -56,16 +63,21 @@ public class LevelCreator : MonoBehaviour
                 {
                     tempCard = playerCharacter;
                     mainCamera.transform.position = playerCharacter.transform.position + Vector3.back;
-                    
+                    tempCard.GetComponent<Collider2D>().enabled = false;
                 }
-                else if (x == levelWidth - 1 && y == levelHeight - 1)
+                else if (x == exitDoorCreationPoint.x && y == exitDoorCreationPoint.y)
                 {
-                    tempCard = cardFactory.NewCardCreate(exitDoor, exitDoorData, x, y);
+                    tempCard = cardFactory.NewCardCreateWithPrefab(exitDoor, exitDoorData, x, y);
                     tempCard.gameObject.SetActive(false);
                 }
                 else
-                    tempCard = cardFactory.NewCardCreate(Random.Range(0, cardFactory.cardsData.Count), x, y);
-
+                {
+                    //If level no level data create random level
+                    if(levelData != null)
+                    tempCard = cardFactory.NewCardCreateWithIndex(levelData.GetCell(x, y), x, y);
+                    else
+                    tempCard = cardFactory.NewCardCreateWithIndex(Random.Range(0, cardFactory.cardsData.Count), x, y);
+                }
 
                 if (CardIsSighted(playerCharacter, tempCard))
                     tempCard.gameObject.SetActive(true);

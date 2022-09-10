@@ -2,6 +2,7 @@ using HelloScripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExitDoor : DungeonObject
 {
@@ -17,8 +18,9 @@ public class ExitDoor : DungeonObject
     public override IEnumerator CardClicked(Character playerCard)
     {
 
-        yield return playerCard.moveTime.GetWait();
-        //TODO: CharacterMove Level ends
+        gameObject.SetActive(false);
+        yield return 0f.GetWait();
+        playerCard.MoveCard(this);
         PlayerController.onGameCompleted?.Invoke();
 
     }

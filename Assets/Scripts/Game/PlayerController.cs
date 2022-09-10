@@ -10,24 +10,40 @@ public class PlayerController : MonoBehaviour
     public static Action onGameStarted;
     public static Action onGameFailed;
     public static Action onGameCompleted;
-   public static PlayerState playerState = PlayerState.Play;
+    public static PlayerState playerState = PlayerState.Play;
     public static int money= 0;
+    public static Action onMoneyGain;
     LevelCreator lc;
     private void OnEnable()
     {
         TouchManager.Instance.onTouchBegan += OnTouchBegan;
-        onGameFailed -= OnGameFailed;
+        onGameFailed += OnGameFailed;
+        onGameCompleted += OnGameCompleted;
+        onGameStarted += OnGameStarted;
+       
     }
+
+   
+
     private void Start()
     {
         money = PlayerPrefs.GetInt(Config.PREFS_MONEY, 0);
         lc = LevelCreator.instance;
        playerCard =lc.playerCharacter;
     }
+    private void OnGameStarted()
+    {
+    }
+
+    private void OnGameCompleted()
+    {
+    }
+
     private void OnGameFailed()
     {
         TouchManager.Instance.isActive = false;
     }
+  
     private void OnTouchBegan(TouchInput touch)
     {
         if (playerState == PlayerState.Play)
@@ -51,8 +67,10 @@ public class PlayerController : MonoBehaviour
     {
         TouchManager.Instance.onTouchBegan -= OnTouchBegan;
         onGameFailed -= OnGameFailed;
+        onGameCompleted -= OnGameCompleted;
+        onGameStarted -= OnGameStarted;
     }
-   
+
 
 }
 public enum PlayerState
