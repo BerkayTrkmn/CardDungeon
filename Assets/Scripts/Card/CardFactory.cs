@@ -8,6 +8,7 @@ public class CardFactory : MonoBehaviour
 
     public List<Card> prefabList;
     public List<CardData> cardsData;
+    public List<CardData> allCardsData;
 
     private void Awake()
     {
@@ -18,9 +19,29 @@ public class CardFactory : MonoBehaviour
 
 
     }
+    public Card NewCardCreateWithCardID(int cardIndex, int x, int y)
+    {
+        CardData cardData = allCardsData[cardIndex];
+        // Card currentCard =  ObjectPooler.instance.GetPooledObject(cardData.card.gameObject).GetComponent<Card>();
+        Card currentCard = Instantiate(cardData.card.gameObject).GetComponent<Card>();
+        currentCard.gameObject.SetActive(false);
+        currentCard.SetCard(cardData, x, y);
+        currentCard.PlaceCard(new Vector2(LevelCreator.cardWidth * x, LevelCreator.cardHeight * y));
+        return currentCard;
+    }
     public Card NewCardCreateWithIndex(int cardIndex, int x, int y)
     {
         CardData cardData = cardsData[cardIndex];
+        // Card currentCard =  ObjectPooler.instance.GetPooledObject(cardData.card.gameObject).GetComponent<Card>();
+        Card currentCard = Instantiate(cardData.card.gameObject).GetComponent<Card>();
+        currentCard.gameObject.SetActive(false);
+        currentCard.SetCard(cardData, x, y);
+        currentCard.PlaceCard(new Vector2(LevelCreator.cardWidth * x, LevelCreator.cardHeight * y));
+        return currentCard;
+    }
+    public Card NewCardCreateWithIndex(int x, int y)
+    {
+        CardData cardData = cardsData[Random.Range(0, cardsData.Count)];
         // Card currentCard =  ObjectPooler.instance.GetPooledObject(cardData.card.gameObject).GetComponent<Card>();
         Card currentCard = Instantiate(cardData.card.gameObject).GetComponent<Card>();
         currentCard.gameObject.SetActive(false);

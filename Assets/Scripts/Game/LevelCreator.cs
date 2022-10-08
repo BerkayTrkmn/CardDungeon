@@ -26,7 +26,6 @@ public class LevelCreator : MonoBehaviour
     {
         instance = this;
         mainCamera = Camera.main;
-        levelCards = new Card[levelWidth, levelHeight];
         cardFactory = GetComponent<CardFactory>();
         levelNumber = PlayerPrefs.GetInt(Config.PREFS_LEVEL, 1);
         
@@ -43,11 +42,14 @@ public class LevelCreator : MonoBehaviour
         if(levelNumber-1 < levels.Length)
         {
             LevelData data = levels[levelNumber-1];
+            levelHeight = data.levelCardIDs.GridSize.y;
+            levelWidth = data.levelCardIDs.GridSize.x;
+           
             playerCharacterStartPoint = data.playerPosition;
             exitDoorCreationPoint = data.exitPosition;
             levelData = data.levelCardIDs;
         }
-      
+        levelCards = new Card[levelWidth, levelHeight];
     }
 
     public void CreateLevel()
@@ -74,9 +76,9 @@ public class LevelCreator : MonoBehaviour
                 {
                     //If level no level data create random level
                     if(levelData != null)
-                    tempCard = cardFactory.NewCardCreateWithIndex(levelData.GetCell(x, y), x, y);
+                    tempCard = cardFactory.NewCardCreateWithCardID(levelData.GetCell(x, y), x, y);
                     else
-                    tempCard = cardFactory.NewCardCreateWithIndex(Random.Range(0, cardFactory.cardsData.Count), x, y);
+                    tempCard = cardFactory.NewCardCreateWithIndex(x, y);
                 }
 
                 if (CardIsSighted(playerCharacter, tempCard))
