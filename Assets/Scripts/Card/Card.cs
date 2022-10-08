@@ -15,6 +15,7 @@ public abstract class Card : MonoBehaviour
     protected Transform nameShowerParent;
     protected Transform characterPoint;
     protected Collider2D col;
+   
     protected virtual void OnEnable()
     {
         characterStatsParent = transform.GetChild(1);
@@ -23,6 +24,7 @@ public abstract class Card : MonoBehaviour
         col = GetComponent<Collider2D>();
         if(characterPoint.childCount != 0)characterGO = characterPoint.GetChild(0).gameObject;
         CreateCardWithAnimation();
+        
     }
     public virtual void SetCard(CardData cardData ,int _x, int _y)
     {
@@ -30,8 +32,8 @@ public abstract class Card : MonoBehaviour
         y = _y;
         cardId = cardData.ID;
         cardName = cardData.cardName;
-       
     }
+    
     public virtual void PlaceCard(Vector3 position)
     {
         transform.position = position;

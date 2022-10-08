@@ -19,12 +19,16 @@ public abstract class Character : Card
     public static Action onEnemyKilled;
     public bool isDead = false;
     public Type cardType;
+    protected SpriteRenderer cardSprite;
+    protected Animator cardAnimator;
     protected override void OnEnable()
     {
         base.OnEnable();
         characterStatsParent.gameObject.SetActive(true);
         healthText = characterStatsParent.GetChild(0).GetChild(0).GetComponent<TextMeshPro>();
         attackText = characterStatsParent.GetChild(1).GetChild(0).GetComponent<TextMeshPro>();
+        GetCardSprite();
+        GetCardAnimator();
     }
     public override void SetCard(CardData cardData, int _x, int _y)
     {
@@ -37,6 +41,7 @@ public abstract class Character : Card
         SetCharacterText(attackText, healthText);
     }
 
+    #region Setters/Getters
     public void SetCharacterText(TextMeshPro attackText, TextMeshPro healthText)
     {
         SetAttackText(attackText);
@@ -50,14 +55,25 @@ public abstract class Character : Card
     {
         healthText.text = health.ToString();
     }
+    public virtual SpriteRenderer GetCardSprite()
+    {
+        return cardSprite = transform.GetChild(3).GetChild(0).GetComponent<SpriteRenderer>();
+    }
+    public virtual void GetCardAnimator()
+    {
+        cardAnimator = cardSprite.GetComponent<Animator>();
+    }
+    #endregion
+
     public void CharacterAttack(Character character)
     {
         character.health -= attack;
         if (character.health < 0) character.health = 0;
         character.SetHealthText(character.healthText);
+        cardAnimator.SetTrigger(Config.ANIM_ATTACK);
         onCharacterAttack?.Invoke();
     }
-
+   
     public bool IsCharacterDead()
     {
         return health <= 0 ? true : false;
@@ -92,12 +108,12 @@ public abstract class Character : Card
             playerCard.MoveCard(this);
             gameObject.SetActive(false);
         }
-       
+
     }
     public virtual void MoveCard(Card moveToCard, TweenCallback onComplete)
     {
         transform.DOMove(moveToCard.transform.position, 0.5f).OnComplete(onComplete);
-        
+
     }
     public virtual void MoveCard(Card moveToCard)
     {
@@ -110,11 +126,11 @@ public abstract class Character : Card
             x = moveToCard.x;
             y = moveToCard.y;
             LevelCreator.levelCards[x, y] = this;
-           
+
             lc.SetPlayerSightedCards(this);
             PlayerController.playerState = PlayerState.Play;
         });
-       
+
 
 
     }
