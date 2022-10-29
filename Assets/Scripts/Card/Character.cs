@@ -69,8 +69,11 @@ public abstract class Character : Card
     {
         character.health -= attack;
         if (character.health < 0) character.health = 0;
+        if (health > 0) { 
+            cardAnimator.SetTrigger(Config.ANIM_ATTACK);
+        
+        }
         character.SetHealthText(character.healthText);
-        cardAnimator.SetTrigger(Config.ANIM_ATTACK);
         onCharacterAttack?.Invoke();
     }
    
@@ -83,17 +86,15 @@ public abstract class Character : Card
         if (health > 0)
         {
             playerCard.CharacterAttack(this);
-            yield return new WaitForSeconds(0.1f);
+
+            yield return new WaitForSeconds(cardAnimator.GetCurrentAnimatorStateInfo(0).length);
             if (!IsCharacterDead())
                 CharacterAttack(playerCard);
             else
             {
                 //TODO : player haraket edebilir.
-                characterGO.Destroy();
-                attackText.gameObject.SetActive(false);
-                healthText.gameObject.SetActive(false);
-                isDead = true;
-                onEnemyKilled?.Invoke();
+                cardAnimator.GetComponent<AnimationFunctions>().SetDeathAction(CharacterDeath);
+                cardAnimator.SetTrigger(Config.ANIM_DEAD);
             }
             if (playerCard.IsCharacterDead())
             {
@@ -134,5 +135,12 @@ public abstract class Character : Card
 
 
     }
-
+    public virtual void CharacterDeath()
+    {
+        characterGO.Destroy();
+        attackText.gameObject.SetActive(false);
+        healthText.gameObject.SetActive(false);
+        isDead = true;
+        onEnemyKilled?.Invoke();
+    }
 }

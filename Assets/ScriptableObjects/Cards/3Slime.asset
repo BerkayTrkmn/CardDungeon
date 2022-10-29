@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b80172ce1df501e498bff5ae939eed78, type: 3}
-  m_Name: 3Eagle
+  m_Name: 3Slime
   m_EditorClassIdentifier: 
   ID: 3
-  cardName: Eagle
+  cardName: Slime
   card: {fileID: 5963284239199053842, guid: cbdebb33797559345b3734d15fa52b2b, type: 3}
   health: 4
-  attack: 2
+  attack: 1
+  sight: 1

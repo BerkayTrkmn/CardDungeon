@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5422681064683526331, guid: b35da4a04b8fde547b9a4292ec346851, type: 3}
       propertyPath: m_Name
-      value: Eagle
+      value: Slime
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b35da4a04b8fde547b9a4292ec346851, type: 3}
@@ -79,6 +79,9 @@ MonoBehaviour:
   y: 0
   health: 0
   attack: 0
+  sight: 0
+  moveTime: 0.5
+  isDead: 0
 --- !u!4 &1373797286439439600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5422681065821169949, guid: b35da4a04b8fde547b9a4292ec346851, type: 3}
@@ -93,15 +96,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4018151118487090012, guid: e7bcc2a06fed5554d8edb7c02b1b5ec8, type: 3}
       propertyPath: m_Name
-      value: Eagle
-      objectReference: {fileID: 0}
-    - target: {fileID: 4018151118487090014, guid: e7bcc2a06fed5554d8edb7c02b1b5ec8, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
+      value: Slime
       objectReference: {fileID: 0}
     - target: {fileID: 4018151118487090015, guid: e7bcc2a06fed5554d8edb7c02b1b5ec8, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018151118487090015, guid: e7bcc2a06fed5554d8edb7c02b1b5ec8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018151118487090015, guid: e7bcc2a06fed5554d8edb7c02b1b5ec8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018151118487090015, guid: e7bcc2a06fed5554d8edb7c02b1b5ec8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4018151118487090015, guid: e7bcc2a06fed5554d8edb7c02b1b5ec8, type: 3}
       propertyPath: m_LocalPosition.x

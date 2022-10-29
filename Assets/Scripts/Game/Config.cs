@@ -10,7 +10,7 @@ public class Config : MonoBehaviour
     //Animator
     public const string ANIM_ATTACK = "Attack";
     public const string ANIM_IDLE = "Idle";
-    public const string ANIM_HIT = "Hit";
+    public const string ANIM_DEAD = "Dead";
 
 
 }
